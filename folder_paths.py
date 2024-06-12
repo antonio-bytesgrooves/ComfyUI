@@ -47,6 +47,15 @@ if not os.path.exists(input_directory):
     except:
         logging.error("Failed to create input directory")
 
+if not os.path.exists("/data/models"):
+    try:
+        src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "models")
+        dst = '/data/models'
+        
+        os.symlink(src, dst)
+    except:
+        logging.error("Failed to create symbolic link to models directory")
+
 def set_output_directory(output_dir):
     global output_directory
     output_directory = output_dir
