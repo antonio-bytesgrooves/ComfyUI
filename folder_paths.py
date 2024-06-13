@@ -47,6 +47,75 @@ if not os.path.exists(input_directory):
     except:
         logging.error("Failed to create input directory")
 
+    if os.path.exists("/data"):
+        if not os.path.exists("/data/output"):
+            try:
+                os.makedirs("/data/output")
+            except:
+                logging.error("Failed to create output directory")
+
+    if os.path.exists("/data"):
+        if not os.path.exists("/data/input"):
+            try:
+                os.makedirs("/data/input")
+            except:
+                logging.error("Failed to create input directory")
+
+    if os.path.exists("/data"):
+        if not os.path.exists("/data/temp"):
+            try:
+                os.makedirs("/data/temp")
+            except:
+                logging.error("Failed to create temp directory")
+
+    if os.path.exists("/data"):
+        if not os.path.exists("/data/models"):
+            try:
+                os.makedirs("/data/models")
+        
+                if os.path.exists("/data/models"):
+                    if not os.path.exists("/data/models/checkpoints"):
+                        os.makedirs("/data/models/checkpoints")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/loras"):
+                            os.makedirs("/data/models/loras")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/embeddings"):
+                            os.makedirs("/data/models/embeddings")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/controlnet"):
+                            os.makedirs("/data/models/controlnet")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/upscale_models"):
+                            os.makedirs("/data/models/upscale_models")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/vae"):
+                            os.makedirs("/data/models/vae")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/configs"):
+                            os.makedirs("/data/models/configs")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/clip_vision"):
+                            os.makedirs("/data/models/clip_vision")
+
+                if os.path.exists("/data/models"):
+                        if not os.path.exists("/data/models/clip"):
+                            os.makedirs("/data/models/clip")
+
+                src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "models")
+                dst = '/data/models'
+                os.symlink(src, dst)
+            except:
+                logging.error("Failed to create models directory")
+
+
 def set_output_directory(output_dir):
     global output_directory
     output_directory = output_dir
