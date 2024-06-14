@@ -7,7 +7,8 @@ supported_pt_extensions = set(['.ckpt', '.pt', '.bin', '.pth', '.safetensors', '
 folder_names_and_paths = {}
 
 base_path = os.path.dirname(os.path.realpath(__file__))
-models_dir = os.path.join(base_path, "models")
+models_dir = "/data/models"
+#models_dir = os.path.join(base_path, "models")
 folder_names_and_paths["checkpoints"] = ([os.path.join(models_dir, "checkpoints")], supported_pt_extensions)
 folder_names_and_paths["configs"] = ([os.path.join(models_dir, "configs")], [".yaml"])
 
@@ -199,7 +200,8 @@ def add_model_folder_path(folder_name, full_folder_path):
         folder_names_and_paths[folder_name][0].append(full_folder_path)
     else:
         folder_names_and_paths[folder_name] = ([full_folder_path], set())
-
+    
+    
 def get_folder_paths(folder_name):
     return folder_names_and_paths[folder_name][0][:]
 
