@@ -5,6 +5,41 @@ import os
 import importlib.util
 import folder_paths
 import time
+import subprocess
+import requests
+
+def is_port_in_use(port):
+    """Check if a port is in use on the localhost."""
+    try:
+        requests.get(f"http://0.0.0.0:{port}")
+        return True
+    except requests.ConnectionError:
+        return False
+    
+def main():
+    secondary_script_path = '/data/app/main.py'
+    port = 7860  # Your specific port
+
+    if os.path.exists(secondary_script_path):
+        print(f"Starting secondary script: {secondary_script_path}")
+        process = subprocess.Popen(
+            ['python', secondary_script_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+
+        # Wait until the secondary script occupies the port
+        while not is_port_in_use(port):
+            print(f"Waiting for secondary script to occupy port {port}...")
+            time.sleep(1)
+
+        print(f"Secondary script {secondary_script_path} is now running and has occupied port {port}.")
+    else:
+        print(f"Secondary script not found at {secondary_script_path}")
+
+if __name__ == "__main__":
+    main()
 
 def execute_prestartup_script():
     def execute_script(script_path):
